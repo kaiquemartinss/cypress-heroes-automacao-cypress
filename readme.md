@@ -77,9 +77,6 @@ Ao clicar no botão de curtir (👍), o sistema permite que o mesmo usuário adi
 
 ```
 cypress-heroes-automacao-cypress/
-├── .github/
-│   └── workflows/
-│       └── ci.yml                  # Pipeline de CI com GitHub Actions
 ├── automacao/
 │   ├── client/
 │   │   └── cypress/
