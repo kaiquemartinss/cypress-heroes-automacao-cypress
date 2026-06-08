@@ -14,24 +14,27 @@ jobs:
 
     steps:
       - name: Checkout do repositório
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Instalar dependências do projeto
         run: npm install
+        working-directory: automacao
 
       - name: Instalar dependências do client
         run: npm install
-        working-directory: client
+        working-directory: automacao/client
 
       - name: Configurar banco de dados
         run: npm run setup
+        working-directory: automacao
 
       - name: Subir a aplicação em background
         run: npm run dev &
-        
+        working-directory: automacao
+
       - name: Aguardar aplicação iniciar
         run: npx wait-on http://localhost:3000 --timeout 60000
 
       - name: Executar testes Cypress
         run: npx cypress run
-        working-directory: client
+        working-directory: automacao/client
