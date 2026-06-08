@@ -1,58 +1,165 @@
-# Cypress Heroes Demo Application
+# 🦸 Cypress Heroes — Automação de Testes com Cypress
 
-This is a demo application that shows how to use Cypress to run end-to-end,
-component, and API tests against an application.
+![Cypress](https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-22.22.3-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Concluído-brightgreen?style=for-the-badge)
 
-## Getting Started
+---
 
-The app is a mono repo that uses npm workspaces. Once you clone the project,
-install the dependencies at the root folder:
+## 📋 Sobre o Projeto
 
-```sh
-npm install
+O **Cypress Heroes** é uma aplicação demo desenvolvida pela equipe do Cypress que simula uma plataforma de contratação de heróis. Com frontend em **React** e backend em **NestJS**, a aplicação permite listar, curtir e contratar heróis, além de oferecer funcionalidades administrativas como criação, edição e exclusão de heróis.
+
+Este projeto foi desenvolvido como parte do curso **Guardião da Qualidade** da LumeStack, com o objetivo de aplicar na prática os conceitos de automação de testes E2E em um ambiente realista, utilizando **Cypress** com **TypeScript**, comandos customizados, tasks de banco de dados e integração contínua com **GitHub Actions**.
+
+🔗 Repositório oficial: [cypress-io/cypress-heroes](https://github.com/cypress-io/cypress-heroes)
+
+---
+
+## 🎯 Funcionalidades Testadas
+
+| Funcionalidade | Usuário | Cenários Cobertos |
+|---|---|---|
+| Login | Ambos | Credenciais válidas, inválidas e campos em branco |
+| Logout | Ambos | Logout com sucesso |
+| Curtir Herói | Ambos | Com e sem autenticação |
+| Contratar Herói | Ambos | Com e sem autenticação |
+| Criar Herói | Admin | Criação com dados válidos |
+| Editar Herói | Admin | Edição de nome do herói |
+| Excluir Herói | Admin | Exclusão com confirmação |
+
+---
+
+## 🧪 Casos de Teste
+
+| ID | Funcionalidade | Cenário | Status |
+|---|---|---|---|
+| CT001 | Login | Login com credenciais válidas | ✅ |
+| CT002 | Login | Login com credenciais inválidas | ✅ |
+| CT003 | Login | Login com campos em branco | ✅ |
+| CT004 | Logout | Logout com sucesso | ✅ |
+| CT005 | Curtir Herói | Curtir herói sem estar logado | ✅ |
+| CT006 | Curtir Herói | Curtir herói logado | ✅ |
+| CT007 | Contratar Herói | Contratar herói sem estar logado | ✅ |
+| CT008 | Contratar Herói | Contratar herói logado | ✅ |
+| CT009 | Gerenciamento (Admin) | Criar novo herói | ✅ |
+| CT010 | Gerenciamento (Admin) | Editar herói | ✅ |
+| CT011 | Gerenciamento (Admin) | Excluir herói | ✅ |
+
+---
+
+## 🐛 Bug Report
+
+### BUG01 — Like ilimitado no mesmo herói
+
+**Severidade:** Média | **Prioridade:** Alta
+
+Ao clicar no botão de curtir (👍), o sistema permite que o mesmo usuário adicione likes ilimitados ao mesmo herói. O contador de fãs é incrementado a cada clique sem nenhuma restrição por usuário.
+
+📄 Documentação completa em [`bug-report/bug-report.md`](./bug-report/bug-report.md)
+
+---
+
+## 💡 Sugestões de Melhoria
+
+| ID | Título | Prioridade |
+|---|---|---|
+| SM01 | Implementar cadastro de novos usuários | Alta |
+| SM02 | Exibir feedback visual ao realizar logout | Média |
+
+📄 Documentação completa em [`melhorias/sugestoes-de-melhoria.md`](./melhorias/sugestoes-de-melhoria.md)
+
+---
+
+## 🗂️ Estrutura do Repositório
+
+```
+cypress-heroes-automacao-cypress/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                  # Pipeline de CI com GitHub Actions
+├── automacao/
+│   ├── client/
+│   │   └── cypress/
+│   │       ├── e2e/
+│   │       │   └── heroes.cy.ts    # Spec com todos os testes E2E
+│   │       ├── fixtures/
+│   │       └── support/
+│   │           ├── commands.ts     # Comandos customizados
+│   │           ├── data.ts         # Tasks de banco de dados
+│   │           └── e2e.ts
+│   └── server/                     # Backend NestJS
+├── bug-report/
+│   └── bug-report.md               # BUG01 documentado
+├── casos-de-testes/
+│   └── casos-de-teste.md           # CT001 a CT011
+└── melhorias/
+    └── sugestoes-de-melhoria.md    # SM01 e SM02
 ```
 
-After that a few more things need to be set up (databases and such), to do so run:
+---
 
-```sh
+## 🏗️ Padrões e Boas Práticas
+
+- **Comandos Customizados** — `cy.login()`, `cy.createHero()`, `cy.deleteHero()` centralizados em `commands.ts`
+- **Tasks de Banco de Dados** — criação e exclusão de heróis diretamente via Prisma para isolamento de testes
+- **cy.session()** — reaproveitamento de sessão de login para testes mais rápidos
+- **TypeScript** — tipagem estática para maior segurança e legibilidade do código
+- **GitHub Actions** — pipeline de CI configurado para rodar os testes automaticamente a cada push
+- **Casos de Teste Documentados** — todos os cenários documentados no padrão profissional
+- **Bug Report e Melhorias** — artefatos de QA completos além da automação
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+### Pré-requisitos
+
+- [Node.js v22.22.3](https://nodejs.org/)
+- npm (já incluso com o Node)
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/kaiquemartinss/cypress-heroes-automacao-cypress.git
+
+# Acesse a pasta de automação
+cd cypress-heroes-automacao-cypress/automacao
+
+# Instale as dependências
+npm install
+
+# Configure o banco de dados
 npm run setup
 ```
 
+### Subindo a aplicação
 
-To launch the app for development, run:
-
-```sh
+```bash
 npm run dev
 ```
 
-This will start both the client and server apps in dev mode. The site will be
-available at http://localhost:3000.
+### Executando os testes
 
-## App Overview
+```bash
+# Acesse a pasta client
+cd client
 
-The Cypress Heroes app consists of a frontend client app written in React that
-uses Vite, as well as a backend app that uses NestJS.
+# Modo interativo (interface gráfica do Cypress)
+npx cypress open
 
-### React Client App
-
-The React client app is located in the **client** folder. It is a standard React [Vite](https://vitejs.dev/) app.
-
-Todo: fill out
-
-### NestJS Server App
-
-The server app is in the **server** folder. It is built with the [NestJS](https://nestjs.com/) Node.js framework. It uses [Prisma](https://www.prisma.io/) for the database ORM.
-
-#### Database seeding and resetting
-
-The database is seeded from the **server/prisma/seed.ts** script when you set up the app. If at any time you want to reset the database back to its initial state, run:
-
-```sh
-npm run resetdb
+# Modo headless (linha de comando)
+npx cypress run
 ```
 
-## Environment Variables
+---
 
-The client app uses an environment variable to know what the URL is for the
-backend api named `VITE_API_URL`. It defaults to "http://localhost:3001" for use
-in dev mode, and should be overriden in other environments/modes.
+## 👨‍💻 Autor
+
+**Kaique Martins**
+Estudante de QA | Curso Guardião da Qualidade — LumeStack
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kaiquemartins/)
